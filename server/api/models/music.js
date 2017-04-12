@@ -56,7 +56,7 @@ export default class Music {
     }
 
     update(req, res) {
-      console.log("updating:", req.params.id, "[ body:", req.body)
+      console.log("updating:", req.params.id, "[ body:", req.body);
         model.findByIdAndUpdate({
             _id: req.params.id
         }, req.body, (err, music) => {
