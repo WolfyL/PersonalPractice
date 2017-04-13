@@ -12,8 +12,6 @@ module.exports = (app) => {
 
     var music = new Music();
 
-    //app.post('/login', music.connect);
-
     router.get('/', Auth.hasAuthorization, music.findAll);
 
     router.get('/:id', Auth.hasAuthorization, music.findById);

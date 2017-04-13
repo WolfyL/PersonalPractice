@@ -1,37 +1,43 @@
 <div class="container-fluid">
     <h1>Music ATM:</h1>
-    <div class="row">
-        <div class="col-xs-12">
-            <form>
-                <label>Group :</label>
-                <input type="text" ng-model="group">
-                <label>Title :</label>
-                <input type="text" ng-model="title">
-                <button type="submit" ng-click="add()">Add</button>
-
-            </form>
+    <div class="row" style="border: 2px red solid">
+        <div class="col-xs-6">
+            <div class="col-xs-12">
+                <form>
+                    <label>Group :</label>
+                    <input type="text" ng-model="group">
+                    <label>Title :</label>
+                    <input type="text" ng-model="title">
+                    <button type="submit" ng-click="add()">Add</button>
+                </form>
+            </div>
+            <div class="col-xs-12">
+                <table>
+                    <th>Group</th>
+                    <th>Title</th>
+                    <th>Options</th>
+                    <tbody>
+                        <tr ng-repeat="line in tab | filter:group | filter: title  | orderBy : 'group':0 track by $index">
+                            <td>{{line.group}}</td>
+                            <td>{{line.title}}</td>
+                            <td>
+                                <button type="button" ng-click="editLine($index)">Edit </button>
+                                <ng-show ng-show="editMe[$index]">
+                                    <input type="text" ng-model="newGroup">
+                                    <input type="text" ng-model="newTitle">
+                                    <button type="button" ng-click="editDone($index,  {group:newGroup, title:newTitle})">Validate Edit</button>
+                                </ng-show>
+                                <button type="button" ng-click="deleteLine($index, line)"> Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-xs-12">
-            <table>
-                <th>Group</th>
-                <th>Title</th>
-                <th>Options</th>
-                <tbody>
-                    <tr ng-repeat="line in tab | filter:group | filter: title | orderBy : 'group':0 track by $index">
-                        <td>{{line.group}}</td>
-                        <td>{{line.title}}</td>
-                        <td>
-                            <button type="button" ng-click="editLine($index)">Edit </button>
-                            <ng-show ng-show="editMe[$index]">
-                                <input type="text" ng-model="newGroup">
-                                <input type="text" ng-model="newTitle">
-                                <button type="button" ng-click="editDone($index,  {group:newGroup, title:newTitle})">Validate Edit</button>
-                            </ng-show>
-                            <button type="button" ng-click="deleteLine($index, line)"> Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-xs-6">
+          <h3>Random music?</h3>
+          <button type="button" ng-click="randomMusic()">Gimme a Music plz !</button> {{randomGroup}} - {{randomTitle}}
+
         </div>
     </div>
 </div>

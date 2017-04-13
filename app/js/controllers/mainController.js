@@ -7,7 +7,6 @@ angular.module('app')
 
         MusicService.getAll().then(function(res) {
             $scope.tab = res.data;
-            console.log(res.data);
         });
 
         $scope.add = function() {
@@ -23,7 +22,6 @@ angular.module('app')
             });
             MusicService.getAll().then(function(res) {
                 $scope.tab = res.data;
-                console.log(res.data);
             });
             $scope.group = '';
             $scope.title = '';
@@ -34,17 +32,10 @@ angular.module('app')
         };
 
         $scope.editDone = function(index, line) {
-            // line = {
-            //     group: newGroup,
-            //     title: newTitle
-            // };
-            // $scope.tab.splice(index, 1, line);
-            console.log(line);
             MusicService.update($scope.tab[index]._id, line).then(function(res) {
                 console.log("Update success");
                 MusicService.getAll().then(function(res) {
                     $scope.tab = res.data;
-                    console.log(res.data);
                 });
             }, function(err) {
                 console.log("Update failed");
@@ -63,4 +54,13 @@ angular.module('app')
                 console.log("Delete failed");
             });
         };
+
+        $scope.randomMusic = function() {
+            MusicService.getAll().then(function(res) {
+                var i = Math.floor(Math.random(0, 101) * $scope.tab.length);
+                $scope.randomGroup = res.data[i].group;
+                $scope.randomTitle = res.data[i].title;
+            });
+        };
+
     });
