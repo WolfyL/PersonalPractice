@@ -8,6 +8,7 @@
                 <label>Title :</label>
                 <input type="text" ng-model="title">
                 <button type="submit" ng-click="add()">Add</button>
+
             </form>
         </div>
         <div class="col-xs-12">
@@ -16,7 +17,7 @@
                 <th>Title</th>
                 <th>Options</th>
                 <tbody>
-                    <tr ng-repeat="line in tab | filter:group | filter: title track by $index">
+                    <tr ng-repeat="line in tab | filter:group | filter: title | orderBy : 'group':0 track by $index">
                         <td>{{line.group}}</td>
                         <td>{{line.title}}</td>
                         <td>
