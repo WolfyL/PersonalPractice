@@ -1,9 +1,11 @@
 <div class="container-fluid">
-    <h1>Music ATM:</h1>
-    <div class="row" style="border: 2px red solid">
-        <div class="col-xs-6">
+    <div class="row">
+        <h1>Music ATM:</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-5">
             <div class="col-xs-12">
-                <form>
+                <form id="addMusic">
                     <label>Group :</label>
                     <input type="text" ng-model="group">
                     <label>Title :</label>
@@ -25,7 +27,7 @@
                                 <ng-show ng-show="editMe[$index]">
                                     <input type="text" ng-model="newGroup">
                                     <input type="text" ng-model="newTitle">
-                                    <button type="button" ng-click="editDone($index,  {group:newGroup, title:newTitle})">Validate Edit</button>
+                                    <button type="button" ng-click="editDone($index, line._id, {group:newGroup, title:newTitle})">Validate Edit</button>
                                 </ng-show>
                                 <button type="button" ng-click="deleteLine($index, line)"> Delete</button>
                             </td>
@@ -34,10 +36,28 @@
                 </table>
             </div>
         </div>
-        <div class="col-xs-6">
-          <h3>Random music?</h3>
-          <button type="button" ng-click="randomMusic()">Gimme a Music plz !</button> {{randomGroup}} - {{randomTitle}}
-
+        <div class="col-xs-7">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h3>Random music?</h3>
+                    <button type="button" ng-click="randomMusic()">Gimme a Music plz !</button> {{randomGroup}} - {{randomTitle}}
+                </div>
+            </div>
+            <div class="row">
+                <div id="commentSection" class="col-xs-6">
+                    <h3>Comment Section</h3>
+                    <form>
+                        <textarea type="text" rows="7" cols="69" ng-model="comment"></textarea>
+                        <button type="submit" ng-click="addComment()">Add Comment</button>
+                    </form>
+                    <ul ng-repeat="comment in comments | orderBy : 'date':1 track by $index">
+                        <!-- | orderBy : 'date':1 -->
+                        <button class="btn btn-primary btn-sm" ng-click="like(comment._id, user.email)">Like</button>{{nblike}}
+                        <textarea rows="2" cols="50" readonly="readonly">{{comment.comment}}</textarea>
+                        <em id="commentDetails">posted by {{comment.userPseudo}} the {{comment.date | date : 'MMM d, y h:mm:ss a'}}</em>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

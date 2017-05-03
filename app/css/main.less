@@ -1,36 +1,71 @@
 // Main less file for your application.
 // Use `@import` to use other less files
 // relative to 'app/css' or 'vendor/css'.
-@blue: #17B6FF;
+@blue: #4B0082;
 @magenta: #FF17B6;
 @lime: #B6FF17;
 @green: #1BFF17;
+@purple: #8A2BE2;
 
 body {
     background: @green;
     color: black;
 }
 
-h1{
-  text-decoration: underline;
+h1 {
+    text-decoration: underline;
+    text-align: center;
+    color: @blue;
+    margin-bottom: 2vw;
 }
 
-h3{
-  text-decoration: underline;
-  color: blue;
+h3 {
+    text-decoration: underline;
+    text-align: center;
+    color: @purple;
 }
 
-th{
-  border: 1px solid black;
-  padding: 5px;
-  font-size: 25px;
-  font-style: bold;
+th {
+    border: 1px solid black;
+    padding: 5px;
+    font-size: 25px;
+    font-style: bold;
+    text-align: center;
 }
-td{
-  border : 1px solid black;
-  padding: 2px;
+
+td {
+    border: 1px solid black;
+    padding: 2px;
 }
-tr{
-  border : 1px solid black;
-  padding: 2px;
+
+tr {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+textarea {
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px @purple;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#addMusic {
+    margin-left: 5vw;
+}
+
+#commentDetails{
+  font-size: 10px;
+  text-align: right;
+  // margin-left: 120px;
+}
+
+#commentSection{
+  max-height: 29vw;
+  width: auto;
+  overflow-y: scroll;
+
 }

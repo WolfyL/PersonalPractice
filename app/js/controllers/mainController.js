@@ -1,12 +1,16 @@
 angular.module('app')
-    .controller('MainController', function($scope, MusicService, CurrentUser) {
+    .controller('MainController', function($scope, MusicService, CommentService, CurrentUser) {
         $scope.tab = [];
         $scope.editMe = [];
+        $scope.comments = [];
         var maLine;
-        var userId = CurrentUser.user()._id;
 
         MusicService.getAll().then(function(res) {
             $scope.tab = res.data;
+        });
+
+        CommentService.getAll().then(function(res) {
+            $scope.comments = res.data;
         });
 
         $scope.add = function() {
@@ -31,8 +35,8 @@ angular.module('app')
             $scope.editMe[index] = true;
         };
 
-        $scope.editDone = function(index, line) {
-            MusicService.update($scope.tab[index]._id, line).then(function(res) {
+        $scope.editDone = function(index, id, newLine) {
+            MusicService.update(id, newLine).then(function(res) {
                 console.log("Update success");
                 MusicService.getAll().then(function(res) {
                     $scope.tab = res.data;
@@ -61,6 +65,20 @@ angular.module('app')
                 $scope.randomGroup = res.data[i].group;
                 $scope.randomTitle = res.data[i].title;
             });
+        };
+
+        $scope.addComment = function() {
+            // $scope.comments.push($scope.comment);
+            CommentService.create({
+                userPseudo: CurrentUser.user().email,
+                comment: $scope.comment,
+                like: []
+            });
+            CommentService.getAll().then(function(res){
+              $scope.comments = res.data;
+              console.log($scope.comments);
+            });
+            $scope.comment = "";
         };
 
     });
